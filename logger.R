@@ -4,9 +4,11 @@
 ## Coded by Enrique Delgado        ##
 #####################################
 
+library(glue)
+
 Logger = setRefClass("Logger",
-            fields = list(filename="character", 
-                          log_level="character",
+            fields = list(log_level="character",
+                          filename="character",
                           topic="character"),
             methods = list(
               get_level=function(){
