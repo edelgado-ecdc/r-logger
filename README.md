@@ -12,7 +12,6 @@ logger$info("This is an info message.")
 logger$warning("This is a warning message.")
 logger$error("This is an error message.")
 logger$fatal("This is a fatal message.")
-logger$traces("This is a traces message. It will go to a different file and will not show!")
 ```
 
 Log levels included by default are:
