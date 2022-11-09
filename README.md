@@ -1,11 +1,12 @@
 # r-logger
 Simple logger for R scripts.
 
-Declare an instance of the Logger class and you are free to go!
+Using the forgeLogger method you can create your own and custom Logger class! Simply specify the additional fields you need and their type (character, numeric, etc.). Once declared, you can use it to set instances of the logger and use it anywhere.
 
 ```{r}
 source('logger.R')
-logger <- Logger(log_level = 'INFO', topic = 'main')
+Logger <- forgeLogger(name = 'Logger', execGUID = 'character', stage = 'character', step = 'character')
+logger <- Logger(log_level = 'INFO', execGUID = '5eff70ab-000f0f00e-0283473-fafff90ff', stage = 'setup', step = 'init')
 logger$debug("This is a debug message. It won't show as INFO level is below DEBUG.")
 logger$info("This is an info message.")
 logger$warning("This is a warning message.")
@@ -26,15 +27,15 @@ Each level includes all levels below, with "OFF" meaning that no message will be
 
 I recommend to initialise the Logger instance on .GlobalEnv (i.e. `assign('logger', Logger(log_level = 'INFO', filename = 'default'), envir = .GlobalEnv)` for better availability.
 
-An additional parameter is set (topic) to include further information about the execution circumstances, to be added as the name of a file or subprocess. 
-
 ## Installation
 You will need Stringi v. 1.6.2.
 
 Just source the script and follow the example in the previous section.
 
 ## Configuration
-If you want your logs to be output to a file, you will need to set the parameter filename to a location of your choice (.e.g. 'logs/execution.log'). There is a flag that can be also configured to override each type of outputs: `console_output`, for direct output to stdio; `file_output`, to write into a file (A+ mode), `database_output`, to write directly to a database (unsupported).
+If you want your logs to be output to a file, you will need to set the parameter filename to a location of your choice (.e.g. 'logs/execution.log'). There is a flag that can be also configured to override each type of outputs: `console_output`, for direct output to stdio; `file_output`, to write into a file (A+ mode).
+
+This new version also includes a simple memory monitor with minimal performance impact. To activate this simply declare the logger object with the flag `memory_monitor` set to `True`.
 
 ## To Do
  - Better self-documentation.
